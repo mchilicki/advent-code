@@ -33,14 +33,15 @@ namespace Chilicki.AdventCode.Day2
             if (Command == Command.Forward)
             {
                 IncreaseHorizontal(position, Units);
+                IncreaseDepthWithAim(position, Units);
             }
             if (Command == Command.Up)
             {
-                DeacreaseDepth(position, Units);
+                DeacreaseAim(position, Units);
             }
             if (Command == Command.Down)
             {
-                IncreaseDepth(position, Units);
+                IncreaseAim(position, Units);
             }
             return position;
         }
@@ -50,14 +51,19 @@ namespace Chilicki.AdventCode.Day2
             position.Horizontal += units;
         }
 
-        private void IncreaseDepth(Position position, int units)
+        private void IncreaseDepthWithAim(Position position, int units)
         {
-            position.Depth += units;
+            position.Depth += units * position.Aim;
         }
 
-        private void DeacreaseDepth(Position position, int units)
+        private void IncreaseAim(Position position, int units)
         {
-            IncreaseDepth(position, units * (-1));
+            position.Aim += units;
+        }
+
+        private void DeacreaseAim(Position position, int units)
+        {
+            IncreaseAim(position, units * (-1));
         }
     }
 }
